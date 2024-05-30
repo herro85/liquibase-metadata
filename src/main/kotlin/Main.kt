@@ -8,4 +8,5 @@ fun main() {
     val parser = JsonParserService()
     val changeLog = parser.parse("/test/resources/liquibase-config/example-changelog.json")
     println(changeLog)
+
 }
