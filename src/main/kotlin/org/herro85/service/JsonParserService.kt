@@ -1,6 +1,7 @@
 package org.herro85.service
 
 import com.google.gson.GsonBuilder
+import org.herro85.dao.Change
 import org.herro85.dao.ChangeLog
 import org.herro85.dao.ChangeSet
 import java.io.File
@@ -10,15 +11,20 @@ class JsonParserService {
         val jsonString = readFileToString(fileName)
 
         // Create a Gson instance
-        val gson = GsonBuilder().create()
+        val gson = GsonBuilder()
+            .registerTypeAdapter(Change::class.java, ChangeAbstractClassCreator())
+            .create()
 
         // Parse the JSON string into a ChangeLog object
         val changeLog = gson.fromJson(jsonString, ChangeLog::class.java)
 
         // Now you can access the changelog data
-        println(changeLog.changeSets.size)
-        changeLog.changeSets.forEach { changeSet ->
-            println(changeSet)
+        if (changeLog.changeSets != null) {
+            println(changeLog.changeSets.size)
+
+            changeLog.changeSets.forEach { changeSet ->
+                println(changeSet)
+            }
         }
 
         return changeLog

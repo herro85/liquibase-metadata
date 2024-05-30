@@ -3,7 +3,7 @@ package org.herro85.dao
 import com.google.gson.annotations.SerializedName
 
 data class ChangeLog(
-    @SerializedName("changeLog")
+    @SerializedName("databaseChangeLog")
     val changeSets: List<ChangeSet>
 )
 
